@@ -1,0 +1,7 @@
+transformers==4.56.1
+sentencepiece
+fastapi
+uvicorn[standard]
+torch           # CPU build; for CUDA use the specific pip index from PyTorch site
+gradio          # optional UI
+anthropic>=0.40.0

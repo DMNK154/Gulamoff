@@ -1,0 +1,33 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+.venv/
+
+# Model weights (too large for git)
+models/
+
+# Data files (generated at runtime)
+memory_store.jsonl
+heat_map.json
+trend_data.db
+trend_data.db-wal
+trend_data.db-shm
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Claude Code
+.claude/

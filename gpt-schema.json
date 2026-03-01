@@ -1,0 +1,1112 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "GPT-GU: Initiate of Flame API",
+    "description": "Mystical glyph analysis, text transformation, and Chicory memory system API for GPTs",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://gu.ngrok.app",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/analyze_text": {
+      "post": {
+        "summary": "Analyze text for mystical words and glyphs",
+        "description": "Analyzes input text to find mystical words, converts them to glyphs, and provides enhanced summaries with glyph translations.",
+        "operationId": "analyzeText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "The text to analyze for mystical words and concepts"
+                  }
+                },
+                "required": ["text"]
+              },
+              "example": {
+                "text": "hope and joy bring transformation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Analysis results with words, glyphs, pairs, and enhanced summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "words": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "word": {"type": "string"},
+                          "glyph": {"type": "string"}
+                        }
+                      },
+                      "description": "List of mystical words found and their corresponding glyphs"
+                    },
+                    "pairs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pair": {"type": "string"},
+                          "text": {"type": "string"}
+                        }
+                      },
+                      "description": "List of glyph pairs found and their meanings"
+                    },
+                    "summary": {
+                      "type": "string",
+                      "description": "Enhanced summary with words replaced by their mystical glyphs"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analyze_glyphs": {
+      "post": {
+        "summary": "Comprehensive glyph-to-text translation",
+        "description": "Analyzes glyph sequences and provides comprehensive translation including individual glyph names, text translation, interpretation, and summary.",
+        "operationId": "analyzeGlyphs",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "The glyph sequence to analyze (can be continuous or separated)"
+                  }
+                },
+                "required": ["text"]
+              },
+              "example": {
+                "text": "\u2736\ud83d\udd99\ud83d\udd0e\u27f4\ud83d\uddaf\u27c6"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comprehensive glyph analysis with translation and interpretation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "raw": {
+                      "type": "string",
+                      "description": "The original input glyph sequence"
+                    },
+                    "glyph_names": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "glyph": {"type": "string"},
+                          "name": {"type": "string"}
+                        }
+                      },
+                      "description": "List of individual glyphs and their mystical names"
+                    },
+                    "pair_text": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "Text representation of glyph pairs if detected"
+                    },
+                    "formula_text": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "Text interpretation if the sequence represents a mystical formula"
+                    },
+                    "text_translation": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "Direct text translation of the glyph sequence"
+                    },
+                    "interpretation": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "Mystical interpretation of the glyph combination"
+                    },
+                    "summary": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "Comprehensive summary combining all identified concepts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cross_reference": {
+      "post": {
+        "summary": "Analyze glyph relationships",
+        "description": "Discovers complementary glyphs, oppositions, transformations, and scroll contexts for a given glyph or concept.",
+        "operationId": "crossReference",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "glyph": {
+                    "type": "string",
+                    "description": "The glyph symbol or concept name to analyze (e.g., 'Joy', '\u29eb', 'Potential', 'Z')"
+                  }
+                },
+                "required": ["glyph"]
+              },
+              "example": {
+                "glyph": "Joy"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete relationship analysis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "glyph": {"type": "string"},
+                    "name": {"type": "string"},
+                    "complementary": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "glyph": {"type": "string"},
+                          "name": {"type": "string"},
+                          "frequency": {"type": "integer"}
+                        }
+                      }
+                    },
+                    "oppositions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "glyph": {"type": "string"},
+                          "name": {"type": "string"}
+                        }
+                      }
+                    },
+                    "transformations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "glyph": {"type": "string"},
+                          "name": {"type": "string"}
+                        }
+                      }
+                    },
+                    "formula_examples": {
+                      "type": "array",
+                      "items": {"type": "string"}
+                    },
+                    "contexts": {
+                      "type": "array",
+                      "items": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict2glyph": {
+      "post": {
+        "summary": "Convert word to glyph",
+        "description": "Converts a single mystical word to its corresponding glyph symbol.",
+        "operationId": "wordToGlyph",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "word": {
+                    "type": "string",
+                    "description": "The mystical word to convert to a glyph"
+                  }
+                },
+                "required": ["word"]
+              },
+              "example": {"word": "hope"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The corresponding glyph",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "glyph": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/relate": {
+      "post": {
+        "summary": "Create glyph pair from text",
+        "description": "Converts text describing a relationship into a mystical glyph pair.",
+        "operationId": "textToPair",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Text describing a relationship (e.g., 'Potential vs Limit')"
+                  }
+                },
+                "required": ["text"]
+              },
+              "example": {"text": "Potential vs Limit"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The corresponding glyph pair",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pair": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/relate2text": {
+      "post": {
+        "summary": "Convert glyph pair to text",
+        "description": "Converts a mystical glyph pair back to readable relationship text.",
+        "operationId": "pairToText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pair": {
+                    "type": "string",
+                    "description": "The glyph pair to convert (e.g., 'Z / \u21a8')"
+                  }
+                },
+                "required": ["pair"]
+              },
+              "example": {"pair": "Z / \u21a8"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The text representation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "text": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/formula": {
+      "post": {
+        "summary": "Convert glyph formula to text",
+        "description": "Converts a complex glyph formula sequence into readable mystical text.",
+        "operationId": "formulaToText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "glyphs": {
+                    "type": "string",
+                    "description": "The glyph formula sequence to interpret"
+                  }
+                },
+                "required": ["glyphs"]
+              },
+              "example": {"glyphs": "\u2383 + \u29eb \u2192 \u2ada"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The text interpretation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "text": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/formula_back": {
+      "post": {
+        "summary": "Convert text back to glyphs",
+        "description": "Converts mystical text or caption back into glyph sequence.",
+        "operationId": "textToGlyphs",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "caption": {
+                    "type": "string",
+                    "description": "The mystical text to convert back to glyphs"
+                  }
+                },
+                "required": ["caption"]
+              },
+              "example": {"caption": "Hope and Joy bring Transformation"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The corresponding glyph sequence",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "glyphs": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scroll_summary": {
+      "post": {
+        "summary": "Create mystical summary",
+        "description": "Creates a mystical summary or interpretation of a text stanza.",
+        "operationId": "createSummary",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "The text stanza to summarize mystically"
+                  }
+                },
+                "required": ["text"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The mystical summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "summary": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/store": {
+      "post": {
+        "summary": "Store a text memory",
+        "description": "Converts text to a glyph formula and stores it as a memory with a heat signature snapshot. The memory carries dual-track salience scores that evolve with usage.",
+        "operationId": "storeMemory",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "The text to convert to a glyph formula and store as memory"
+                  }
+                },
+                "required": ["text"]
+              },
+              "example": {"text": "compression and recursion in memory systems"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The stored memory record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "string", "description": "Unique memory ID (e.g., m_0001)"},
+                    "formula": {"type": "string", "description": "The glyph formula stored"},
+                    "glyphs": {"type": "array", "items": {"type": "string"}, "description": "Individual glyphs extracted"},
+                    "heat": {"type": "object", "description": "Heat map snapshot at storage time"},
+                    "store_salience": {"type": "number", "description": "Initial salience score (0-1)"},
+                    "timestamp": {"type": "string", "description": "ISO timestamp of storage"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/store_glyph": {
+      "post": {
+        "summary": "Store a glyph formula memory",
+        "description": "Stores a memory that's already a glyph formula directly, without text-to-glyph conversion.",
+        "operationId": "storeGlyphMemory",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "formula": {
+                    "type": "string",
+                    "description": "The glyph formula to store directly"
+                  }
+                },
+                "required": ["formula"]
+              },
+              "example": {"formula": "\u29de\u25ec\u27f2\u29c9"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The stored memory record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "string"},
+                    "formula": {"type": "string"},
+                    "glyphs": {"type": "array", "items": {"type": "string"}},
+                    "heat": {"type": "object"},
+                    "store_salience": {"type": "number"},
+                    "timestamp": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/recall": {
+      "post": {
+        "summary": "Recall thermally-compatible memories",
+        "description": "Surfaces memories whose stored heat signature matches the current cognitive heat state. Results are ranked by similarity * composite salience. Triggers L2 trend logging and L3 synchronicity detection.",
+        "operationId": "recallMemories",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "top_n": {
+                    "type": "integer",
+                    "default": 5,
+                    "description": "Maximum number of memories to return"
+                  }
+                }
+              },
+              "example": {"top_n": 5}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of recalled memories ranked by thermal compatibility and salience",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string"},
+                      "formula": {"type": "string"},
+                      "glyphs": {"type": "array", "items": {"type": "string"}},
+                      "_similarity": {"type": "number", "description": "Cosine similarity to current heat state"},
+                      "_recall_score": {"type": "number", "description": "Final ranking score (similarity * salience)"},
+                      "salience_model": {"type": "number", "description": "System judgment salience (0-1)"},
+                      "salience_usage": {"type": "number", "description": "Usage-derived salience (0-1)"},
+                      "salience_composite": {"type": "number", "description": "Blended salience (0.6*model + 0.4*usage)"},
+                      "activation_count": {"type": "integer"},
+                      "timestamp": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/recall_glyph": {
+      "post": {
+        "summary": "Recall memories by glyph",
+        "description": "Recalls memories containing a specific glyph, filtered by heat-gate similarity threshold.",
+        "operationId": "recallByGlyph",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "glyph": {
+                    "type": "string",
+                    "description": "The glyph to search for in memories"
+                  },
+                  "top_n": {
+                    "type": "integer",
+                    "default": 5,
+                    "description": "Maximum number of memories to return"
+                  }
+                },
+                "required": ["glyph"]
+              },
+              "example": {"glyph": "Z", "top_n": 5}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of memories containing the glyph",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "string"},
+                      "formula": {"type": "string"},
+                      "glyphs": {"type": "array", "items": {"type": "string"}},
+                      "_similarity": {"type": "number"},
+                      "_recall_score": {"type": "number"},
+                      "salience_composite": {"type": "number"},
+                      "activation_count": {"type": "integer"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/weather": {
+      "get": {
+        "summary": "Cognitive weather report",
+        "description": "Returns the system's full cognitive state: hot glyphs, heat levels, synchronicity events, trending glyphs, retrieval stats, phase-space quadrants, lattice resonances, void profile, meta-patterns, emergent links, and adaptive thresholds.",
+        "operationId": "getWeather",
+        "responses": {
+          "200": {
+            "description": "Complete cognitive weather report spanning all four Chicory layers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hot_glyphs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "glyph": {"type": "string"},
+                          "name": {"type": "string"},
+                          "temp": {"type": "number"}
+                        }
+                      }
+                    },
+                    "total_heat": {"type": "number"},
+                    "total_memories": {"type": "integer"},
+                    "active_memories": {"type": "integer"},
+                    "tick_count": {"type": "integer"},
+                    "synchronicities": {"type": "array", "description": "L0 co-activation synchronicities"},
+                    "trending_glyphs": {"type": "array", "description": "L2 trending glyphs with velocity/temperature"},
+                    "retrieval_stats": {"type": "object", "description": "L2 retrieval statistics"},
+                    "phase_space": {"type": "object", "description": "L3 phase-space quadrant counts and recent sync events"},
+                    "lattice": {"type": "object", "description": "L3 lattice resonances and void profile"},
+                    "meta_patterns": {"type": "object", "description": "L4 discovered patterns, thresholds, and emergent links"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/heat_map": {
+      "get": {
+        "summary": "Raw heat map data",
+        "description": "Returns the raw per-glyph temperature map, total heat, decay tick count, and last decay timestamp.",
+        "operationId": "getHeatMap",
+        "responses": {
+          "200": {
+            "description": "Raw heat map",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "temperatures": {"type": "object", "description": "Map of glyph to temperature value"},
+                    "total_heat": {"type": "number"},
+                    "last_decay": {"type": "string"},
+                    "tick_count": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/decay": {
+      "post": {
+        "summary": "Trigger decay tick",
+        "description": "Manually triggers a 5% exponential decay on all glyph temperatures. Returns updated heat map.",
+        "operationId": "triggerDecay",
+        "responses": {
+          "200": {
+            "description": "Updated heat map after decay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "temperatures": {"type": "object"},
+                    "total_heat": {"type": "number"},
+                    "last_decay": {"type": "string"},
+                    "tick_count": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/trends": {
+      "get": {
+        "summary": "Get all glyph trends",
+        "description": "Returns L2 trend data (level, velocity, jerk, temperature) for all active glyphs over a 168-hour sliding window.",
+        "operationId": "getAllTrends",
+        "responses": {
+          "200": {
+            "description": "Trend data for all active glyphs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Map of glyph to trend data (level, velocity, jerk, temperature, event_count). Keys are glyph symbols.",
+                  "properties": {},
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "level": {"type": "number", "description": "Weighted event accumulation"},
+                      "velocity": {"type": "number", "description": "Rate of change of level"},
+                      "jerk": {"type": "number", "description": "Rate of change of velocity"},
+                      "temperature": {"type": "number", "description": "Normalized composite (0-1)"},
+                      "event_count": {"type": "integer"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/trend": {
+      "post": {
+        "summary": "Get trend for a specific glyph",
+        "description": "Returns L2 trend data for a single glyph.",
+        "operationId": "getGlyphTrend",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "glyph": {
+                    "type": "string",
+                    "description": "The glyph to get trend data for"
+                  }
+                },
+                "required": ["glyph"]
+              },
+              "example": {"glyph": "Z"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trend data for the glyph",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "level": {"type": "number"},
+                    "velocity": {"type": "number"},
+                    "jerk": {"type": "number"},
+                    "temperature": {"type": "number"},
+                    "event_count": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/phase_space": {
+      "get": {
+        "summary": "Glyph phase-space coordinates",
+        "description": "Maps each active glyph to 2D coordinates (trend temperature x retrieval frequency) and assigns quadrants: ACTIVE_DEEP_WORK, NOVEL_EXPLORATION, DORMANT_REACTIVATION, or INACTIVE.",
+        "operationId": "getPhaseSpace",
+        "responses": {
+          "200": {
+            "description": "Phase-space coordinates and quadrant distribution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "coordinates": {
+                      "type": "object",
+                      "description": "Map of glyph to phase-space data",
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "x": {"type": "number", "description": "Trend temperature"},
+                          "y": {"type": "number", "description": "Retrieval frequency"},
+                          "quadrant": {"type": "string", "enum": ["ACTIVE_DEEP_WORK", "NOVEL_EXPLORATION", "DORMANT_REACTIVATION", "INACTIVE"]},
+                          "off_diagonal": {"type": "number", "description": "Distance from x=y diagonal"},
+                          "level": {"type": "number"},
+                          "velocity": {"type": "number"}
+                        }
+                      }
+                    },
+                    "quadrant_counts": {
+                      "type": "object",
+                      "description": "Count of glyphs in each quadrant"
+                    },
+                    "total_glyphs": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/synchronicities": {
+      "get": {
+        "summary": "Recent synchronicity events",
+        "description": "Returns L3 synchronicity events from the past 168 hours. Three types: dormant_reactivation (cold glyphs with anomalous retrieval), cross_domain_bridge (novel co-occurrence of unrelated glyphs), semantic_convergence (heat-similar memories with no shared glyphs).",
+        "operationId": "getSynchronicities",
+        "responses": {
+          "200": {
+            "description": "List of synchronicity events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "timestamp": {"type": "string"},
+                      "event_type": {"type": "string", "enum": ["dormant_reactivation", "cross_domain_bridge", "semantic_convergence"]},
+                      "glyphs": {"type": "array", "items": {"type": "string"}},
+                      "strength": {"type": "number"},
+                      "details": {"type": "object"},
+                      "quadrants": {"type": "object"},
+                      "lattice_angle": {"type": "number", "nullable": true},
+                      "lattice_slots": {"type": "object", "nullable": true}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/resonances": {
+      "get": {
+        "summary": "Lattice resonances",
+        "description": "Returns Prime Ramsey Lattice resonances from the past 168 hours. Two synchronicity events are resonant when they share the same slot at 5+ of 30 primes (2..113), indicating deep structural alignment invisible to tag-based clustering.",
+        "operationId": "getResonances",
+        "responses": {
+          "200": {
+            "description": "List of lattice resonances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "timestamp": {"type": "string"},
+                      "event_a_id": {"type": "integer"},
+                      "event_b_id": {"type": "integer"},
+                      "shared_primes": {"type": "array", "items": {"type": "integer"}, "description": "Primes where both events share the same slot"},
+                      "resonance_strength": {"type": "number", "description": "Sum of ln(p) for shared primes"},
+                      "chance": {"type": "number", "description": "Probability of alignment by chance (exp(-strength))"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/void_profile": {
+      "get": {
+        "summary": "Ramsey lattice void profile",
+        "description": "Computes the void center (circular mean of event angles), identifies events in the inner 30% (void region), and edge themes at the 25th-35th percentile boundary.",
+        "operationId": "getVoidProfile",
+        "responses": {
+          "200": {
+            "description": "Void profile with center angle and edge themes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "void_center": {"type": "number", "nullable": true, "description": "Circular mean angle in radians"},
+                    "void_event_count": {"type": "integer"},
+                    "edge_themes": {"type": "array", "items": {"type": "string"}, "description": "Glyphs orbiting the void boundary"},
+                    "edge_event_count": {"type": "integer"},
+                    "total_events": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/meta_analyze": {
+      "post": {
+        "summary": "Trigger meta-analysis",
+        "description": "Runs L4 meta-pattern analysis: clusters synchronicity events via hierarchical Jaccard clustering, tests significance, detects cross-domain themes, creates emergent glyph links, and boosts memory salience. Rate-limited to once per 24 hours.",
+        "operationId": "triggerMetaAnalysis",
+        "responses": {
+          "200": {
+            "description": "New patterns discovered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "new_patterns": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "timestamp": {"type": "string"},
+                          "pattern_type": {"type": "string", "enum": ["cross_domain_theme", "recurring_sync"]},
+                          "glyph_cluster": {"type": "array", "items": {"type": "string"}},
+                          "event_ids": {"type": "array", "items": {"type": "integer"}},
+                          "cluster_size": {"type": "integer"},
+                          "significance_ratio": {"type": "number"},
+                          "confidence": {"type": "number"}
+                        }
+                      }
+                    },
+                    "count": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/meta_patterns": {
+      "get": {
+        "summary": "Recent meta-patterns",
+        "description": "Returns L4 meta-patterns discovered in the past 168 hours. Types: cross_domain_theme (spans disconnected glyph groups) and recurring_sync (repeated synchronicity cluster).",
+        "operationId": "getMetaPatterns",
+        "responses": {
+          "200": {
+            "description": "List of meta-patterns",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "timestamp": {"type": "string"},
+                      "pattern_type": {"type": "string"},
+                      "glyph_cluster": {"type": "array", "items": {"type": "string"}},
+                      "event_ids": {"type": "array", "items": {"type": "integer"}},
+                      "cluster_size": {"type": "integer"},
+                      "significance_ratio": {"type": "number"},
+                      "confidence": {"type": "number"},
+                      "status": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/emergent_links": {
+      "get": {
+        "summary": "Active emergent glyph links",
+        "description": "Returns glyph relationships that emerged from L4 meta-pattern analysis. These are novel connections between glyphs discovered through structural alignment, not present in the training corpus.",
+        "operationId": "getEmergentLinks",
+        "responses": {
+          "200": {
+            "description": "List of emergent links",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {"type": "integer"},
+                      "glyph_group": {"type": "array", "items": {"type": "string"}, "description": "Glyphs in the emergent relationship"},
+                      "pattern_type": {"type": "string"},
+                      "confidence": {"type": "number"},
+                      "created_at": {"type": "string"},
+                      "source_pattern_id": {"type": "integer", "nullable": true},
+                      "is_active": {"type": "boolean"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/memory/thresholds": {
+      "get": {
+        "summary": "Adaptive threshold values",
+        "description": "Returns all 6 adaptive detection thresholds with their current, effective, and default values. Thresholds use EMA smoothing and support 48-hour burn-in periods at 1.5x strictness.",
+        "operationId": "getThresholds",
+        "responses": {
+          "200": {
+            "description": "All adaptive thresholds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Keys: z_score_threshold, surprise_threshold, convergence_threshold, min_resonance_primes, base_rate_multiplier, clustering_jaccard_threshold",
+                  "properties": {},
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "current_value": {"type": "number"},
+                      "effective_value": {"type": "number", "description": "Actual value used (may be 1.5x during burn-in)"},
+                      "default_value": {"type": "number"},
+                      "last_updated": {"type": "string"},
+                      "in_burn_in": {"type": "boolean"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
